@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: guestbook
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: guestbook
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestbook
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: guestbook
+  template:
+    metadata:
+      labels:
+        app: guestbook
+    spec:
+      containers:
+      - env:
+        - name: FOO
+          value: bar
+        image: ghcr.io/akuity/guestbook:00011-f7cd737
+        name: guestbook
+        ports:
+        - containerPort: 3000
