@@ -29,7 +29,7 @@ spec:
       - env:
         - name: FOO
           value: bar
-        image: ghcr.io/akuity/guestbook:00011-f7cd737
+        image: ghcr.io/akuity/guestbook:latest
         name: guestbook
         ports:
         - containerPort: 3000
